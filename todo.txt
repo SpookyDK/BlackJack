@@ -1,0 +1,4 @@
+Random function
+Draw card
+check bool
+add to hand
