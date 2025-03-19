@@ -6,7 +6,7 @@
 #include <errno.h>
 int get_hand_value(uint8_t player_hand[], uint8_t *cards_value);
 int draw_card(uint8_t player_hand[], uint8_t *cards, _Bool* is_drawn);
-int get_bets(uint8_t *output_array);
+int get_bets(uint8_t *output_array, size_t n);
 
 int main()
 {
@@ -34,19 +34,19 @@ int main()
     uint8_t player_hands[8][6] = { 0 }; //Index [x][0] used to store amount of cards in hand
 
     uint8_t temp[] =  {0,0,0,0,0};
-    get_bets(temp);
+    size_t array_size = sizeof(temp) / sizeof(temp[0]);
+    get_bets(temp, array_size);
 
 
 
 }
 
-int get_bets(uint8_t *output_array)
+int get_bets(uint8_t *output_array, size_t n)
 {
     char input[100];
     char *endptr;
     int i = 0;
-    while (i < sizeof(output_array))
-    {
+    while (i < n)    {
         errno = 0;
         printf("Player %d how much you betting \n", i);
         if(fgets(input, sizeof(input), stdin) == NULL)
@@ -66,11 +66,8 @@ int get_bets(uint8_t *output_array)
                 output_array[i] = amount;
                 i ++;
             }
-
         }
-        
     }
-
     return 1;
 }
 
